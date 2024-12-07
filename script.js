@@ -167,80 +167,167 @@ const enemy= new CreatePlayer({
     }
 });
 
-// console.log(playerKeys.d);
 handleTime({player:player, enemy:enemy});
 
 (c && canvas) && animate(c, canvas, player, enemy, [closeTress]);
 
-window.addEventListener("keydown", (event) => {
-    if(!player.dead && player.allowToMove){
+const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+const hasKeyboard = window.matchMedia("(pointer: fine)").matches;
+
+// console.log(isTouch, hasKeyboard)
+
+if(hasKeyboard) {
+    window.addEventListener("keydown", (event) => {
+        if(!player.dead && player.allowToMove){
+            switch(event.key) {
+                case "d":
+                    playerKeys.d.pressed= true;
+                    player.lastKey= "d";
+                    break;
+        
+                case "a":
+                    playerKeys.a.pressed= true;
+                    player.lastKey= "a";
+                    break;
+        
+                case "w":
+                    player.velocity.y= -20;
+                    break;
+        
+                case " ":
+                    player.attack();
+                    break;
+             }
+        }
+        
+    
+        if(!enemy.dead && enemy.allowToMove){
+            switch(event.key) {
+               case "ArrowRight":
+                   enemyKeys.rightArrow.pressed= true;
+                   enemy.lastKey= "ArrowRight";
+                   break;
+       
+               case "ArrowLeft":
+                   enemyKeys.leftArrow.pressed= true;
+                   enemy.lastKey= "ArrowLeft";
+                   break;
+       
+               case "ArrowUp":
+                   enemy.velocity.y= -20;
+                   break;
+       
+               case "ArrowDown":
+                   enemy.attack();
+                   break;
+            }
+        }
+    });
+    
+    window.addEventListener("keyup", (event) => {
         switch(event.key) {
             case "d":
-                playerKeys.d.pressed= true;
-                player.lastKey= "d";
-                break;
+                playerKeys.d.pressed= false;
+               break;
     
             case "a":
-                playerKeys.a.pressed= true;
-                player.lastKey= "a";
+                playerKeys.a.pressed= false;
                 break;
-    
-            case "w":
-                player.velocity.y= -20;
-                break;
-    
-            case " ":
-                player.attack();
-                break;
-         }
-    }
-    
-
-    if(!enemy.dead && enemy.allowToMove){
-        switch(event.key) {
-           case "ArrowRight":
-               enemyKeys.rightArrow.pressed= true;
-               enemy.lastKey= "ArrowRight";
-               break;
-   
-           case "ArrowLeft":
-               enemyKeys.leftArrow.pressed= true;
-               enemy.lastKey= "ArrowLeft";
-               break;
-   
-           case "ArrowUp":
-               enemy.velocity.y= -20;
-               break;
-   
-           case "ArrowDown":
-               enemy.attack();
-               break;
         }
-    }
-});
+    
+        switch(event.key) {
+            case "ArrowRight":
+                enemyKeys.rightArrow.pressed= false;
+                break;
+    
+            case "ArrowLeft":
+                enemyKeys.leftArrow.pressed= false;
+                break; 
+        }
+    
+    });
+} else if (isTouch){
+    const mobileControls= document.getElementById("mobile-controls");
+    // const upArrowTouch= document.getElementById("arrow-up");
+    // const leftArrowTouch= document.getElementById("arrow-left");
+    // const rightArrowTouch= document.getElementById("arrow-right");
+    // const attackTouch= document.getElementById("attack");
 
-window.addEventListener("keyup", (event) => {
-    switch(event.key) {
-        case "d":
-            playerKeys.d.pressed= false;
-           break;
+    mobileControls.style.display= "flex"
 
-        case "a":
-            playerKeys.a.pressed= false;
-            break;
-    }
-
-    switch(event.key) {
-        case "ArrowRight":
-            enemyKeys.rightArrow.pressed= false;
-            break;
-
-        case "ArrowLeft":
-            enemyKeys.leftArrow.pressed= false;
-            break; 
-    }
-
-});
+    window.addEventListener("touchstart", (event) => {
+        document.getElementById(event.target.id).addEventListener("contextmenu", (event) => {
+            event.preventDefault(); // Disable the default long-press menu
+        });
+        if(!player.dead && player.allowToMove){
+            switch(event.target.id) {
+                case "arrow-right":
+                    playerKeys.d.pressed= true;
+                    player.lastKey= "d";
+                    break;
+        
+                case "arrow-left":
+                    playerKeys.a.pressed= true;
+                    player.lastKey= "a";
+                    break;
+        
+                case "arrow-up":
+                    player.velocity.y= -20;
+                    break;
+        
+                case "attack":
+                    player.attack();
+                    break;
+             }
+        }
+        
+    
+        // if(!enemy.dead && enemy.allowToMove){
+        //     switch(event.key) {
+        //        case "ArrowRight":
+        //            enemyKeys.rightArrow.pressed= true;
+        //            enemy.lastKey= "ArrowRight";
+        //            break;
+       
+        //        case "ArrowLeft":
+        //            enemyKeys.leftArrow.pressed= true;
+        //            enemy.lastKey= "ArrowLeft";
+        //            break;
+       
+        //        case "ArrowUp":
+        //            enemy.velocity.y= -20;
+        //            break;
+       
+        //        case "ArrowDown":
+        //            enemy.attack();
+        //            break;
+        //     }
+        // }
+    });
+    
+    window.addEventListener("touchend", (event) => {
+        switch(event.target.id) {
+            case "arrow-right":
+                playerKeys.d.pressed= false;
+               break;
+    
+            case "arrow-left":
+                playerKeys.a.pressed= false;
+                break;
+        }
+    
+        // switch(event.key) {
+        //     case "ArrowRight":
+        //         enemyKeys.rightArrow.pressed= false;
+        //         break;
+    
+        //     case "ArrowLeft":
+        //         enemyKeys.leftArrow.pressed= false;
+        //         break; 
+        // }
+    
+    });
+}
 
  
 

@@ -50,6 +50,39 @@
             </div>
         </div>
 
+        <!-- mobile-controls -->
+        <div class="mobile-controls" id="mobile-controls">
+            <div class="movement-stick">
+                <div style="color: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px;">
+                    <!-- <div class="movement-key">
+                        <img src="/src//Assets/svg/arrow-up.svg" alt="arrow-up">
+                    </div> -->
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 16px;">
+                        <div class="movement-key" id="arrow-left">
+                            <img src="/src//Assets/svg/arrow-left.svg" alt="arrow-left">
+                        </div>
+                        <div class="movement-key" style="border-radius: 50%;">
+                        </div>
+                        <!-- <div class="movement-key">
+                            <img src="/src//Assets/svg/arrow-down.svg" alt="arrow-down">
+                        </div> -->
+                        <div class="movement-key" id="arrow-right">
+                            <img src="/src//Assets/svg/arrow-right.svg" alt="arrow-right">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <div class="movement-key" id="attack" style="border-radius: 50%; position: absolute; top: 50%; right: 10rem; width: 100px; height: 100px; padding: 1rem">
+                    <img src="/src//Assets/svg/attack.svg" alt="attack">
+                </div>
+                <div class="movement-key" id="arrow-up" style="border-radius: 50%; position: absolute; top: 0%; width: 70px; height: 70px; padding: 1rem;">
+                    <img src="/src//Assets/svg/arrow-up.svg" alt="arrow-up">
+                </div>
+            </div>
+        </div>
+
         <!-- modal -->
         <div 
             id="modal"
@@ -60,7 +93,7 @@
             
         </div>
 
-        <div id="audio-button-parent" style="position: absolute; bottom: 16px; right: 10px; padding: 16px; border-radius: 50%; background-color: #000000; ">
+        <div id="audio-button-parent" style="position: absolute; bottom: 16px; right: 50%; padding: 16px; border-radius: 50%; background-color: #000000; ">
             <img id="audio-button" style="width: 25px; height: 25px;" src="/src/Assets/svg/volume-mute.svg" alt="audio">
         </div>
 
@@ -101,15 +134,18 @@
                             <div style="display: flex; justify-content: center; align-items: center; gap: 16px;">
                                 <div style="background-color: #fff; display: flex; align-items: center; justify-content: center; 
                                         width: 50px; height: 50px;">
-                                    <img src="/src//Assets/svg/arrow-left.svg" alt="arrow-up">
+                                    <img src="/src//Assets/svg/arrow-left.svg" alt="arrow-left">
                                 </div>
+                                <div style="background-color: transparent; display: flex; align-items: center; justify-content: center; 
+                                     width: 50px; height: 50px;">
+                                </div>
+                                <!-- <div style="background-color: #fff; display: flex; align-items: center; justify-content: center; 
+                                        width: 50px; height: 50px;">
+                                    <img src="/src//Assets/svg/arrow-down.svg" alt="arrow-down">
+                                </div> -->
                                 <div style="background-color: #fff; display: flex; align-items: center; justify-content: center; 
                                         width: 50px; height: 50px;">
-                                    <img src="/src//Assets/svg/arrow-down.svg" alt="arrow-up">
-                                </div>
-                                <div style="background-color: #fff; display: flex; align-items: center; justify-content: center; 
-                                        width: 50px; height: 50px;">
-                                    <img src="/src//Assets/svg/arrow-right.svg" alt="arrow-up">
+                                    <img src="/src//Assets/svg/arrow-right.svg" alt="arrow-right">
                                 </div>
                             </div>
                         </div>
